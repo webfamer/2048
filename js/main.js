@@ -56,6 +56,7 @@ var score = 0;
             }
             break;
           /*up*/case 38:
+              console.log(moveUp());
           if(moveUp()){
               setTimeout(function () {
                   creatNum()
@@ -96,7 +97,7 @@ var score = 0;
         }
         function moveLeft() {
                 // console.log("used moveleft")
-            if(!canMoveLeft){
+            if(!canMoveLeft(border)){
                 return false;
             }
         for(var i=0;i<4;i++){
@@ -132,21 +133,21 @@ var score = 0;
         }
         function moveRight() {
             // console.log("used moveleft")
-            if(!canMoveRight){
+            if(!canMoveRight(border)){
                 return false;
             }
             for(var i=0;i<4;i++){
                 for(var j=2;j>=0;j--){
                     if(border[i][j]!=0){//先保证有数字
                         for(var k=3;k>j;k--){
-                            if(border[i][k] ==0&&noBlockHinderRight(i,k,j,border)){//可以移动
+                            if(border[i][k] ==0&&noBlockHinder(i,k,j,border)){//可以移动
                                 // console.log("nohinder");
                                 showMoveAnimation(i,j,i,k);
                                 border[i][k] = border[i][j];
                                 border[i][j]=0;
                                 continue;
                             }
-                            else if(border[i][k]==border[i][j]&&noBlockHinderRight(i,k,j,border)&&!hasConflicted[i][k]){
+                            else if(border[i][k]==border[i][j]&&noBlockHinder(i,k,j,border)&&!hasConflicted[i][k]){
                                 showMoveAnimation(i,j,i,k);
                                 border[i][k] +=border[i][j];
                                 score += border[i][k]
@@ -167,21 +168,21 @@ var score = 0;
             return true;
         }
         function moveUp() {
-            if(!canMoveUp){
+            if(!canMoveUp(border)){
                 return false;
             }
             for(var i=1;i<4;i++){
                 for(var j=0;j<4;j++){
                     if(border[i][j]!=0){//先保证有数字
                         for(var k=0;k<i;k++){
-                            if(border[k][j] ==0&&noBlockHinderUp(j,k,i,border)){//可以移动
+                            if(border[k][j] ==0&&noBlockVertical(j,k,i,border)){//可以移动
                                 // console.log("nohinder");
                                 showMoveAnimation(i,j,k,j);
                                 border[k][j] = border[i][j];
                                 border[i][j]=0;
                                 continue;
                             }
-                            else if(border[k][j]==border[i][j]&&noBlockHinderUp(j,k,i,border)&&!hasConflicted[k][j]){
+                            else if(border[k][j]==border[i][j]&&noBlockVertical(j,k,i,border)&&!hasConflicted[k][j]){
                                 showMoveAnimation(i,j,k,j);
                                 border[k][j] +=border[i][j];
                                 score += border[i][k]
@@ -202,21 +203,21 @@ var score = 0;
             return true;
         }
         function moveDown() {
-            if(!canMoveDown){
+            if(!canMoveDown(border)){
                 return false;
             }
-            for(var i=0;i<3;i++){
+            for(var i=2;i>=0;i--){
                 for(var j=0;j<4;j++){
                     if(border[i][j]!=0){//先保证有数字
                         for(var k=3;k>i;k--){
-                            if(border[k][j] ==0&&noBlockHinderDown(j,k,i,border)){//可以移动
+                            if(border[k][j] ==0&&noBlockVertical(j,k,i,border)){//可以移动
                                 // console.log("nohinder");
                                 showMoveAnimation(i,j,k,j);
                                 border[k][j] = border[i][j];
                                 border[i][j]=0;
                                 continue;
                             }
-                            else if(border[k][j]==border[i][j]&&noBlockHinderDown(j,k,i,border)&&!hasConflicted[k][j]){
+                            else if(border[k][j]==border[i][j]&&noBlockVertical(j,k,i,border)&&!hasConflicted[k][j]){
                                 showMoveAnimation(i,j,k,j);
                                 border[k][j] +=border[i][j];
                                 score += border[i][k]

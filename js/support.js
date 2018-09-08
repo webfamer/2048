@@ -166,22 +166,8 @@ function noBlockHinder(row,col1,col2,border) {
     }
     return true;
 }//判断中间格是否为0行
-function noBlockHinderRight(row,col1,col2,border) {
-    for(var i =col1-1;i>col2;i--){
-        if(border[row][i] !=0)
-            return false;
-    }
-    return true;
-}//判断中间格是否为0行
-function noBlockHinderUp(col,row1,row2,border) {
+function noBlockVertical(col,row1,row2,border) {
     for(var i =row1+1;i<row2;i++){
-        if(border[i][col] !=0)
-            return false;
-    }
-    return true;
-}//判断中间格是否为0行
-function noBlockHinderDown(col,row1,row2,border) {
-    for(var i =row1-1;i>row2;i--){
         if(border[i][col] !=0)
             return false;
     }
