@@ -140,14 +140,14 @@ var score = 0;
                 for(var j=2;j>=0;j--){
                     if(border[i][j]!=0){//先保证有数字
                         for(var k=3;k>j;k--){
-                            if(border[i][k] ==0&&noBlockHinder(i,k,j,border)){//可以移动
+                            if(border[i][k] ==0&&noBlockHinder(i,j,k,border)){//可以移动
                                 // console.log("nohinder");
                                 showMoveAnimation(i,j,i,k);
                                 border[i][k] = border[i][j];
                                 border[i][j]=0;
                                 continue;
                             }
-                            else if(border[i][k]==border[i][j]&&noBlockHinder(i,k,j,border)&&!hasConflicted[i][k]){
+                            else if(border[i][k]==border[i][j]&&noBlockHinder(i,j,k,border)&&!hasConflicted[i][k]){
                                 showMoveAnimation(i,j,i,k);
                                 border[i][k] +=border[i][j];
                                 score += border[i][k]
@@ -210,14 +210,14 @@ var score = 0;
                 for(var j=0;j<4;j++){
                     if(border[i][j]!=0){//先保证有数字
                         for(var k=3;k>i;k--){
-                            if(border[k][j] ==0&&noBlockVertical(j,k,i,border)){//可以移动
+                            if(border[k][j] ==0&&noBlockVertical(j,i,k,border)){//可以移动
                                 // console.log("nohinder");
                                 showMoveAnimation(i,j,k,j);
                                 border[k][j] = border[i][j];
                                 border[i][j]=0;
                                 continue;
                             }
-                            else if(border[k][j]==border[i][j]&&noBlockVertical(j,k,i,border)&&!hasConflicted[k][j]){
+                            else if(border[k][j]==border[i][j]&&noBlockVertical(j,i,k,border)&&!hasConflicted[k][j]){
                                 showMoveAnimation(i,j,k,j);
                                 border[k][j] +=border[i][j];
                                 score += border[i][k]
